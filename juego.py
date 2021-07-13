@@ -4,16 +4,14 @@ import random
 
 class Runner():
     
-    __costumes = ("octopus", "fish","turtle", "prawn","moray")
+    
     
     def __init__(self, x=0, y=0):
-        ixCostume = random.randint(0,4)
-        self.costume = pygame.image.load('images/{}.png'.format(self.__costumes[ixCostume]))
         self.position = [x, y]
         self.name = ""
         
     def avanzar(self):
-        self.position[0] += random.randint(1, 2)
+        self.position[0] += random.randint(1, 3)
 
 
 class Game():
@@ -21,7 +19,8 @@ class Game():
     __posi = (140, 180, 220, 260, 300)
     __startLine = 5
     __finishLine = 620
-    __names = ("Octi", "Carpi", "Morrocoy", "Dobladita", "Chingüire")
+    __names = ("Octi", "Pichi", "Morrocoy", "Gambi", "Dobladita")
+    __costumes = ("octopus", "fish","turtle", "prawn","moray")
     
     def __init__(self):
         self.__screen = pygame.display.set_mode((640,480))
@@ -31,12 +30,9 @@ class Game():
         for i in range(5):
             theRunner = Runner(self.__startLine, self.__posi[i])
             theRunner.name = self.__names[i]
+            theRunner.costume = pygame.image.load('images/{}.png'.format(self.__costumes[i]))
             self.runners.append(theRunner)
             
-    def close():
-        pygame.quit()
-        sys.exit()
-        
     def competir(self):
         gameOver = False
         while not gameOver:
@@ -59,10 +55,10 @@ class Game():
             
         while True:
             for event in pygame.event.get():
-                if event.type == pygame.quit():
-                    self.close()
-                
-                
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+        
                 
 
 if __name__ == '__main__':
